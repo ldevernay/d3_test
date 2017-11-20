@@ -17,11 +17,6 @@
         let max = d3.max(data_values);
         let min = d3.min(data_values);
 
-        let values = d3.selectAll("p").data(data_values).enter().append("p").text(
-            function (value) {
-                return value;
-            }
-        );
         let svg = d3.select("body").append("svg").attr({
             "width": "100%",
             "height": "400px"
@@ -33,7 +28,8 @@
             "fill": "red"
         });
 
-        circles.filter(function (r) { r === max }).attr("fill", "green");
+        circles.filter(function(r) { return r === max; }).attr("fill", "green");
+        circles.filter(function(r) {return r === min;}).attr("fill", "blue");
     </script>
 </body>
 
