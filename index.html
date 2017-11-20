@@ -14,6 +14,9 @@
             "font-size": "40px"
         });
         const data_values = [4, 23, 45, 12, 1, 30, 43];
+        let max = d3.max(data_values);
+        let min = d3.min(data_values);
+
         let values = d3.selectAll("p").data(data_values).enter().append("p").text(
             function (value) {
                 return value;
@@ -23,12 +26,14 @@
             "width": "100%",
             "height": "400px"
         });
-        svg.append("circle").attr({
-            "r": "100px",
-            "cx": "100",
-            "cy": "100",
+        let circles = svg.selectAll("circle").data(data_values).enter().append("circle").attr({
+            "r": function (d) { return d; },
+            "cx": function (d, i) { return (i + 1) * 50; },
+            "cy": "50",
             "fill": "red"
         });
+
+        circles.filter(function (r) { r === max }).attr("fill", "green");
     </script>
 </body>
 
